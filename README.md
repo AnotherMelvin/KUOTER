@@ -5,7 +5,7 @@ A program for calculating how much data has been used from certain applications 
 
 These days, it's becoming more and more common to use the internet as a necessity for our everyday tasks. Whether it is for school, getting work done, entertainment, or connect to others. And with that, our data consumption is becoming more crucial than ever and one of the things we need to control. With this program, you can calculate how much data you consume per day based on platform, quality, and duration.
 
-Available Platform:
+Available Platforms:
 1. Google Meet
 2. Zoom
 3. Youtube
