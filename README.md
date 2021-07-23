@@ -10,7 +10,7 @@ Available Platforms:
 2. Zoom
 3. Youtube
 
-This is just a personal project to experiment with programming and disclaimer*, all of the data shown on the program is just an estimate and not an accurate result.
+This is just a personal project to experiment with programming and disclaimer*, all of the data shown in the program is just an estimate and not an accurate result.
 
 **Don't take all of the results and recommendations as a real guide.*
 
