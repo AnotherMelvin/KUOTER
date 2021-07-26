@@ -4,496 +4,739 @@ import time
 import datetime
 
 #ClearFunction
-clear = lambda: system('clear')
+clear = lambda: system("cls")
 
-#TimeFunction
-def Time(t):
-    time.sleep(t)
+#WaitFunction
+def wait(number):
+    time.sleep(number)
 
 #SpaceFunction
-def Space():
+def space():
     print("")
 
+#BackFunction
+def back(space,text):
+    input(space + text)
+    clear()
+    mainSystem()
+    
+#ErrorFunction
+def error(text):
+    print("   " + text)
+    wait(1)
+    clear()
+
+#SaveFunction
+def saveData():
+    #SaveAllData
+        with open("AllData.txt", "w") as filehandle:
+            for Data in AllData:
+                filehandle.write("%s\n" % Data)
+
+        #SaveDatesData
+        with open("DatesData.txt", "w") as filehandle:
+            for Data in DatesData:
+                filehandle.write("%s\n" % Data)
+
+        #SaveIndicator
+        with open("Indicator.txt", "w") as filehandle:
+            for Data in Indicator:
+                filehandle.write("%s\n" % Data)
+
+        #SaveMeetData
+        with open("MeetData.txt", "w") as filehandle:
+            for Data in MeetData:
+                filehandle.write("%s\n" % Data)
+
+        #SaveYoutubeData
+        with open("YoutubeData.txt", "w") as filehandle:
+            for Data in YoutubeData:
+                filehandle.write("%s\n" % Data)
+
+        #SaveZoomData
+        with open("ZoomData.txt", "w") as filehandle:
+            for Data in ZoomData:
+                filehandle.write("%s\n" % Data)
+
 #LoadingFunction
-def Load(Text):
-    Controller = 0
+def load(text):
+    controller = 0
 
-    def Loading(t):
+    def loading(t):
         print(t)
-
-        Time(0.15)
-
+        wait(0.1)
         clear()
         print(t + ".")
-
-        Time(0.15)
-
+        wait(0.1)
         clear()
         print(t + "..")
-
-        Time(0.15)
-
+        wait(0.1)
         clear()
         print(t + "...")
-
-        Time(0.2)
-
+        wait(0.1)
         clear()
 
     clear()
-    while Controller <= 3:
-        Loading(Text)
-        Controller += 1
-        if Controller == 3:
+    while controller <= 2:
+        loading(text)
+        controller += 1
+        if controller == 2:
             break
 
 #Dates
-CallDate = datetime.datetime.now()
-Date = CallDate.strftime("%d")
-Month = CallDate.strftime("%m")
-Year = CallDate.strftime("%Y")
-DateNow = Year + "-" + Month + "-" + Date
+callDate = datetime.datetime.now()
+date = callDate.strftime("%d")
+month = callDate.strftime("%m")
+year = callDate.strftime("%Y")
+DateNow = year + "-" + month + "-" + date
 
-#Data
+#GlobalData
 AllData = []
 DatesData = []
 Indicator = []
+LanguageIndicator = []
 MeetData = []
+YoutubeData = []
 ZoomData = []
 
 #LoadAllData
-with open('AllData.txt', 'r') as filehandle:
+with open("AllData.txt", "r") as filehandle:
     AllData = [
         current_data.rstrip() for current_data in filehandle.readlines()
     ]
 
 #LoadDatesData
-with open('DatesData.txt', 'r') as filehandle:
+with open("DatesData.txt", "r") as filehandle:
     DatesData = [
         current_data.rstrip() for current_data in filehandle.readlines()
     ]
 
 #LoadIndicator
-with open('Indicator.txt', 'r') as filehandle:
+with open("Indicator.txt", "r") as filehandle:
     Indicator = [
         current_data.rstrip() for current_data in filehandle.readlines()
     ]
 
+#LoadLanguageIndicator
+with open("LanguageIndicator.txt", "r") as filehandle:
+    LanguageIndicator = [
+        current_data.rstrip() for current_data in filehandle.readlines()
+    ]
+
 #LoadMeetData
-with open('MeetData.txt', 'r') as filehandle:
+with open("MeetData.txt", "r") as filehandle:
     MeetData = [
         current_data.rstrip() for current_data in filehandle.readlines()
     ]
 
+#LoadYoutubeData
+with open("YoutubeData.txt", "r") as filehandle:
+    YoutubeData = [
+        current_data.rstrip() for current_data in filehandle.readlines()
+    ]
+    
 #LoadZoomData
-with open('ZoomData.txt', 'r') as filehandle:
+with open("ZoomData.txt", "r") as filehandle:
     ZoomData = [
         current_data.rstrip() for current_data in filehandle.readlines()
     ]
 
 #System
-def System():
+def mainSystem():
     #Sections
     Section = int(0)
-     #Section 0 = Menu Utama
-     #Section 1 = Penghitung Kuota
-     #Section 2 = Data Pemakaian
-     #Section 3 = Tentang
-     #Section 4 = Keluar
+       #Section 0 = Menu Utama / Main Menu
+       #Section 1 = Penghitung Kuota / Data Calculator
+       #Section 2 = Data Pemakaian / History
+       #Section 3 = Tentang / About
+       #Section 4 = Bahasa / Language
+       #Section 5 = Reset Data
+       #Section 6 = Keluar / Exit
 
+    #Language
+    if "English" in LanguageIndicator:
+        menuText = """
+   1. Data Calculator
+   2. History
+   3. About
+   4. Language
+   5. Reset History
+   6. Exit
+   """
+        mainInputText = "Type the number and press Enter to continue "
+        userInputText = "Type a number and press Enter to continue "
+        hourText = "(Hour): "
+        peopleText = "(People): "
+        errorText = "Your input is invalid, please try again."
+        errorMainText = "Your input is invalid, going back to Main Menu."
+        processText = "Processing"
+        resetText = "Resetting"
+        loadText = "Loading"
+        section1Title = "DATA CALCULATOR"
+        section2Title = "HISTORY"
+        section3Title = "ABOUT"
+        section4Title = "LANGUAGE"
+        platformText = "Choose your platform:"
+        platformBackText = "       4. Go back to Main Menu"
+        deviceText = "Choose your device:"
+        cameraText = "Is the camera enabled?:"
+        yesNoText = """ 
+       1. Yes 
+       2. No
+       """
+        resolutionText = "Select your camera's resolution:"
+        screenShareText = "Are you using the Share Screen feature?:"
+        qualityText = "Choose your prefered video quality:"
+        timeText = "How many hours did you spend on"
+        participantText = "How many participants are there on your"
+        resultTextFront = "Your data usage is "
+        resultTextBack = " / Day"
+        estimationText = "Estimated amount of data plan required:"
+        estimationTextMonth = " / Month"
+        estimationTextLimit = "Sorry, there are no choices for you yet."
+        finalText = "Want to calculate again?"
+        tableNameDate = "Date"
+        tableContentsText = "No data has been entered yet."
+        backText = "Press Enter to go back to Main Menu."
+        developerText = "Made By Melvin Tungadi"
+        infoText = """
+   This is just a personal project to experiment
+   with programming, all of the data shown in the 
+   program is just an estimate and not an accurate
+   result.
+        
+   *Don't take all of the results and recommendations
+    as a real huide
+        
+   Thank you for trying this program!
+   """
+        referencesTitleText = "References:"
+        languageText = "Select your prefered language:"
+        languageChoiceText = """
+   1. English
+   2. Bahasa Indonesia
+   """
+        resetQuestionText = "Do you want to reset the data?"
+        resetConfirmationText = "Data has been reset."
+        exitText = "Do you want to exit?"
+        confirmationText = "Thank you for using!"
+        
+    else:
+        menuText = """
+   1. Penghitung Kuota
+   2. Data Pemakaian
+   3. Tentang
+   4. Bahasa
+   5. Reset Data Pemakaian
+   6. Keluar
+   """
+        mainInputText = "Ketik angka dan tekan Enter untuk melanjutkan "
+        userInputText = "Masukkan angka dan tekan Enter untuk melanjutkan "
+        hourText = "(Jam): "
+        peopleText = "(Orang): "
+        errorText = "Pilihan anda tidak valid, silahkan coba lagi."
+        errorMainText = "Pilihan anda tidak valid, kembali ke Menu Utama."
+        processText = "Memproses Data"
+        resetText = "Mereset Data"
+        loadText = "Mengambil Data"
+        section1Title = "PENGHITUNG KUOTA"
+        section2Title = "DATA PEMAKAIAN"
+        section3Title = "TENTANG"
+        section4Title = "BAHASA"
+        platformText = "Pilih platform anda:"
+        platformBackText = "       4. Kembali ke Menu Utama"
+        deviceText = "Pilih device anda:"
+        cameraText = "Apakah anda menggunakan kamera?:"
+        yesNoText = """ 
+       1. Iya 
+       2. Tidak
+   """
+        resolutionText = "Pilih resolusi kamera anda:"
+        screenShareText = "Apakah anda menggunakan fitur Share Sceen?:"
+        qualityText = "Pilih preferensi kualitas video anda:"
+        timeText = "Berapa lama waktu yang digunakan dalam platform"
+        participantText = "Berapa banyak peserta yang ada dalam platform"
+        resultTextFront = "Kuota yang anda gunakan sebesar "
+        resultTextBack = " / Hari"
+        estimationText = "Perkiraan jumlah kuota yang dibutuhkan:"
+        estimationTextMonth = " / Bulan"
+        estimationTextLimit = "Maaf, belum ada pilihan untukmu."
+        finalText = "Ingin menghitung kembali?"
+        tableNameDate = "Tanggal"
+        tableContentsText = "Belum ada data yang dimasukkan."
+        backText = "Tekan Enter untuk kembali ke Menu Utama."
+        developerText = "Dibuat oleh Melvin Tungadi"
+        infoText = """
+   Sebuah proyek pribadi untuk bereksperimen dengan
+   pemrograman, semua data yang ditampilan dalam
+   program hanyalah perkiraan dan bukan hasil yang
+   akurat.
+        
+   *Jangan mengambil semua hasil dan rekomendasi
+    sebagai panduan nyata.
+        
+   Terima kasih telah mencoba program ini!
+   """
+        referencesTitleText = "Referensi:"
+        languageText = "Pilih preferensi bahasa:"
+        languageChoiceText = """
+   1. Bahasa Inggris
+   2. Bahasa Indonesia
+   """
+        resetQuestionText = "Apakah anda ingin mereset data anda?"
+        resetConfirmationText = "Data Pemakaian telah direset."
+        exitText = "Apakah anda ingin keluar?"
+        confirmationText = "Terima kasih telah menggunakan!"        
+        
     #MainMenu
     print(f"{'KUOTER' : ^60}")
-    print(f"{'--- Kuota Belajar ---' : ^61}")
-    print("""
-   1. Penghitung Kuota
-   2. Data Pemakaian 
-   3. Tentang
-   4. Keluar
-   """)
-    MainChoice = int(
-        input("   Ketik angka dan Enter untuk melanjutkan (1/2/3/4): "))
-
+    print(f"{'--- Kuota Meter ---' : ^61}")
+    print(menuText)
+    MainChoice = str(input("   " + mainInputText + "(1/2/3/4/5/6): "))
+        
     #MainChoice
-    if MainChoice == 1:
+    if MainChoice == "1":
         Section = int(1)
         clear()
-    elif MainChoice == 2:
+    elif MainChoice == "2":
         Section = int(2)
         clear()
-    elif MainChoice == 3:
+    elif MainChoice == "3":
         Section = int(3)
         clear()
-    elif MainChoice == 4:
+    elif MainChoice == "4":
         Section = int(4)
         clear()
-    else:
-        print("   Pilihan tidak valid, silahkan coba lagi.")
-        Time(1)
+    elif MainChoice == "5":
+        Section = int(5)
         clear()
-        System()
+    elif MainChoice == "6":
+        Section = int(6)
+        clear()
 
- #Section1
+    else:
+        error(errorText)
+        mainSystem()
 
-    def Section1():
+    #Section1
+    def section1():
         #Title
-        def Title():
-            print(f"{'PENGHITUNG KUOTA' : ^60}")
-            Space()
+        def title():
+            print(f"{section1Title : ^60}")
+            space()
 
-    #Parameters
+        #InputValues
         Platform = int(0)
-         #Platform 0 = Zoom
-         #Platform 1 = Google Meet
+           #Platform 0 = Zoom
+           #Platform 1 = Google Meet
+           #Platform 2 = Youtube
         Device = int(0)
-         #Device 0 = Desktop
-         #Device 1 = Mobile
+           #Device 0 = Desktop
+           #Device 1 = Mobile
         Camera = int(0)
-         #Camera 0 = No Camera (Audio Only)
-         #Camera 1 = With Camera
+           #Camera 0 = No Camera (Audio Only)
+           #Camera 1 = With Camera
         Resolution = int(0)
-         #Resolution 0 = SD Camera
-         #Resolution 1 = HD Camera
+           #Resolution 0 = SD Camera
+           #Resolution 1 = HD Camera
         ScreenShare = int(0)
-         #ScreenShare 0 = No Screenshare
-         #ScreenShare 1 = With Screenshare
+           #ScreenShare 0 = No Screenshare
+           #ScreenShare 1 = With Screenshare
 
         #DataInput
         VD = float(0)
         AD = float(0)
         SS = float(0)
+        YT = float(0)
 
         #Platform
-        Title()
-        print("   Pilih platform yang anda gunakan selama menjalani PJJ")
+        title()
+        print("   " + platformText)
         print(""" 
        1. Zoom 
        2. Google Meet
-       """)
-        PlatformChoice = int(
-            input("   Ketik angka dan Enter untuk melanjutkan (1/2): "))
+       3. Youtube""")
+        print(platformBackText)
+        space()
+        PlatformChoice = str(input("   " + mainInputText + "(1/2/3/4): "))
 
         #PlatformChoice
-        if PlatformChoice == 1:
-            clear()
+        if PlatformChoice == "1":
             P = " Zoom"
-        elif PlatformChoice == 2:
+            clear()
+            
+        elif PlatformChoice == "2":
             Platform = int(1)
+            P = " Google Meet"
             clear()
-            P = " Meet"
+            
+        elif PlatformChoice == "3":
+            Platform = int(2)
+            P = " Youtube"
+            clear()
+            
+        elif PlatformChoice == "4":
+            clear()
+            mainSystem()
+            
         else:
-            print("   Pilihan tidak valid, silahkan coba lagi.")
-            Time(1)
-            clear()
-            Section1()
+            error(errorText)
+            section1()
 
         #Device
-        Title()
-        print("   Pilih versi device yang dijalankan platform" + P)
-        print(""" 
+        if Platform == 0 or Platform == 1:
+            title()
+            print("   " + deviceText)
+            print(""" 
        1. Desktop 
        2. Mobile
       """)
-        DeviceChoice = int(
-            input("   Ketik angka dan Enter untuk melanjutkan (1/2): "))
+            DeviceChoice = str(input("   " + mainInputText + "(1/2): "))
 
-        #DeviceChoice
-        if DeviceChoice == 1:
-            clear()
-        elif DeviceChoice == 2:
-            Device = int(1)
-            clear()
-        else:
-            print("   Pilihan tidak valid, silahkan coba lagi.")
-            Time(1)
-            clear()
-            Section1()
+            #DeviceChoice
+            if DeviceChoice == "1":
+                clear()
+            
+            elif DeviceChoice == "2":
+                Device = int(1)
+                clear()
+            
+            else:
+                error(errorText)
+                section1()
 
         #Camera
-        Title()
-        print("   Apakah anda menggunakan kamera?")
-        print(""" 
-       1. Tidak (Hanya Audio) 
-       2. Iya
-      """)
-        CameraChoice = int(
-            input("   Ketik angka dan Enter untuk melanjutkan (1/2): "))
+        if Platform == 0 or Platform == 1:
+            title()
+            print("   " + cameraText)
+            print(yesNoText)
+            CameraChoice = str(input("   " + mainInputText + "(1/2): "))
 
-        #CameraChoice
-        if CameraChoice == 1:
-            clear()
-        elif CameraChoice == 2:
-            Camera = int(1)
-            clear()
-        else:
-            print("   Pilihan tidak valid, silahkan coba lagi.")
-            Time(1)
-            clear()
-            Section1()
+            #CameraChoice          
+            if CameraChoice == "1":
+                Camera = int(1)
+                clear()
+                
+            elif CameraChoice == "2":
+                clear()    
+            
+            else:
+                error(errorText)
+                section1()
 
         #Resolution
-        Title()
         if Camera == 1 and Device == 0:
-            print("   Pilih resolusi kamera anda")
+            title()
+            print("   " + resolutionText)
             print(""" 
        1. SD (Standard Definition) 
        2. HD (High Defintion)
        """)
-            ResolutionChoice = int(
-                input("   Ketik angka dan Enter untuk melanjutkan (1/2): "))
+            ResolutionChoice = str(input("   " + mainInputText + "(1/2): "))
 
             #ResolutionChoice
-            if ResolutionChoice == 1:
+            if ResolutionChoice == "1":               
                 clear()
-            elif ResolutionChoice == 2:
+
+            elif ResolutionChoice == "2":
                 Resolution = int(1)
                 clear()
+
             else:
-                print("   Pilihan tidak valid, silahkan coba lagi.")
-                Time(1)
-                clear()
-                Section1()
+                error(errorText)
+                section1()
 
         #ScreenShare
-        clear()
-        Title()
-        print("   Apakah anda menggunakan fitur share screen?")
-        print(""" 
-       1. Tidak 
-       2. Iya
-      """)
-        ScreenShareChoice = int(
-            input("   Ketik angka dan Enter untuk melanjutkan (1/2): "))
+        if Platform == 0 or Platform == 1:        
+            title()
+            print("   " + screenShareText)
+            print(yesNoText)
+            ScreenShareChoice = str(input("   " + mainInputText + "(1/2): "))
 
-        #ScreenShareChoice
-        if ScreenShareChoice == 1:
-            clear()
-        elif ScreenShareChoice == 2:
-            ScreenShare = int(1)
-            clear()
-        else:
-            print("   Pilihan tidak valid, silahkan coba lagi.")
-            Time(1)
-            clear()
-            Section1()
+            #ScreenShareChoice
+            if ScreenShareChoice == "1":
+                ScreenShare = int(1)
+                clear()
+                
+            elif ScreenShareChoice == "2":
+                clear()
+            
+            else:
+                error()
+                section1()
+
+        #YoutubeQuality
+        if Platform == 2:
+            title()
+            print("   " + qualityText)
+            print(""" 
+       1. 144p 
+       2. 240p
+       3. 360p
+       4. 480p
+       5. 720p (HD)
+       6. 1080p (Full HD)
+       7. 1440p (Quad HD)
+       8. 2160p (Ultra HD / 4K)
+       9. 4320p (Full Ultra HD / 8K)
+      """)
+            QualityChoice = str(input("   " + mainInputText + "(1/2/3/4/5/6/7/8/9): "))
+        
+            #YoutubeQualityChoice
+            if QualityChoice == "1":
+                YT += float(0.060)
+                clear()
+                
+            elif QualityChoice == "2":
+                YT += float(0.215)
+                clear()
+            elif QualityChoice == "3":
+                YT += float(0.375)
+                clear()                
+            elif QualityChoice == "4":
+                YT += float(0.570)
+                clear()               
+            elif QualityChoice == "5":
+                YT += float(1.950)
+                clear()              
+            elif QualityChoice == "6":
+                YT += float(3.300)
+                clear()             
+            elif QualityChoice == "7":
+                YT += float(5.400)
+                clear()         
+            elif QualityChoice == "8":
+                YT += float(14.250)
+                clear()              
+            elif QualityChoice == "9":
+                YT += float(15.750)
+                clear()
+            
+            else:
+                error(errorText)
+                section1()
 
         #Time
-        Title()
-        print("   Berapa lama waktu yang digunakan dalam platform" + P + "?")
-        Space()
-        WaktuPemakaian = int(
-            input("   Masukkan angka dan Enter untuk melanjutkan (Jam): "))
+        title()
+        print("   " + timeText + P + "?")
+        space()
+        WPInput = str(input("   " + userInputText + hourText))
 
         #TimeChoice
-        if WaktuPemakaian == 0:
-            print("   Pilihan tidak valid, silahkan coba lagi.")
-            Time(1)
+        WaktuPemakaian = int(WPInput)
+        WPInputCheck = WPInput.isdigit()
+        if WPInputCheck == False:
+            error(errorText)
+            section1()
+            
+        else:
             clear()
-            Section1()
 
         #Participant
-        clear()
-        Title()
-        print("   Berapa banyak peserta yang ada dalam platform" + P + "?")
-        Space()
-        JumlahPeserta = int(
-            input("   Masukkan angka dan Enter untuk melanjutkan (Orang): "))
+        if Platform == 0 or Platform == 1:
+            title()
+            print("   " + participantText + P + "?")
+            space()
+            JPInput = str(input("   " + userInputText + peopleText))
 
-        #ParticipantChoice
-        if JumlahPeserta == 0:
-            print("   Pilihan tidak valid, silahkan coba lagi.")
-            Time(1)
-            clear()
-            Section1()
+            #ParticipantChoice
+            JumlahPeserta = int(JPInput)
+            JPInputCheck = JPInput.isdigit()
+            if JPInputCheck == False:
+                error(errorText)
+                section1()
+            
+            else:
+                clear()
 
-    #Combination
-        #ZoomSD
-        if JumlahPeserta <= 10 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 0:
-            VD += float(0.540)
-        if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 0:
-            VD += float(0.675)
-        if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 0:
-            VD += float(0.810)
-        if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 0:
-            VD += float(0.945)
-        if JumlahPeserta >= 41 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 0:
-            VD += float(1.080)
+            #ZoomSD
+            if JumlahPeserta <= 10 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 0:
+                VD += float(0.540)
+            if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 0:
+                VD += float(0.675)
+            if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 0:
+                VD += float(0.810)
+            if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 0:
+                VD += float(0.945)
+            if JumlahPeserta >= 41 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 0:
+                VD += float(1.080)
 
-        #ZoomSD + ScreenShare
-        if JumlahPeserta <= 10 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 1:
-            VD += float(0.540)
-            SS += float(0.045)
-        if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 1:
-            VD += float(0.675)
-            SS += float(0.045)
-        if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 1:
-            VD += float(0.810)
-            SS += float(0.045)
-        if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 1:
-            VD += float(0.945)
-            SS += float(0.045)
-        if JumlahPeserta >= 41 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 1:
-            VD += float(1.080)
-            SS += float(0.045)
+            #ZoomSD + ScreenShare
+            if JumlahPeserta <= 10 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 1:
+                VD += float(0.540)
+                SS += float(0.045)
+            if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 1:
+                VD += float(0.675)
+                SS += float(0.045)
+            if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 1:
+                VD += float(0.810)
+                SS += float(0.045)
+            if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 1:
+                VD += float(0.945)
+                SS += float(0.045)
+            if JumlahPeserta >= 41 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 1:
+                VD += float(1.080)
+                SS += float(0.045)
 
-        #ZoomHD
-        if JumlahPeserta <= 10 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 0:
-            VD += float(1.080)
-        if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 0:
-            VD += float(1.215)
-        if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 0:
-            VD += float(1.350)
-        if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 0:
-            VD += float(1.485)
-        if JumlahPeserta >= 41 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 0:
-            VD += float(1.620)
+            #ZoomHD
+            if JumlahPeserta <= 10 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 0:
+                VD += float(1.080)
+            if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 0:
+                VD += float(1.215)
+            if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 0:
+                VD += float(1.350)
+            if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 0:
+                VD += float(1.485)
+            if JumlahPeserta >= 41 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 0:
+                VD += float(1.620)
 
-        #ZoomHD + ScreenShare
-        if JumlahPeserta <= 10 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 1:
-            VD += float(1.080)
-            SS += float(0.045)
-        if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 1:
-            VD += float(1.215)
-            SS += float(0.045)
-        if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 1:
-            VD += float(1.350)
-            SS += float(0.045)
-        if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 1:
-            VD += float(1.485)
-            SS += float(0.045)
-        if JumlahPeserta >= 41 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 1:
-            VD += float(1.620)
-            SS += float(0.045)
+            #ZoomHD + ScreenShare
+            if JumlahPeserta <= 10 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 1:
+                VD += float(1.080)
+                SS += float(0.045)
+            if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 1:
+                VD += float(1.215)
+                SS += float(0.045)
+            if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 1:
+                VD += float(1.350)
+                SS += float(0.045)
+            if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 1:
+                VD += float(1.485)
+                SS += float(0.045)
+            if JumlahPeserta >= 41 and Platform == 0 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 1:
+                VD += float(1.620)
+                SS += float(0.045)
 
-        #ZoomMobile
-        if JumlahPeserta <= 10 and Platform == 0 and Device == 1 and Camera == 1 and ScreenShare == 0:
-            VD += float(0.270)
-        if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 0 and Device == 1 and Camera == 1 and ScreenShare == 0:
-            VD += float(0.337)
-        if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 0 and Device == 1 and Camera == 1 and ScreenShare == 0:
-            VD += float(0.405)
-        if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 0 and Device == 1 and Camera == 1 and ScreenShare == 0:
-            VD += float(0.472)
-        if JumlahPeserta >= 41 and Platform == 0 and Device == 1 and Camera == 1 and ScreenShare == 0:
-            VD += float(0.540)
+            #ZoomMobile
+            if JumlahPeserta <= 10 and Platform == 0 and Device == 1 and Camera == 1 and ScreenShare == 0:
+                VD += float(0.270)
+            if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 0 and Device == 1 and Camera == 1 and ScreenShare == 0:
+                VD += float(0.337)
+            if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 0 and Device == 1 and Camera == 1 and ScreenShare == 0:
+                VD += float(0.405)
+            if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 0 and Device == 1 and Camera == 1 and ScreenShare == 0:
+                VD += float(0.472)
+            if JumlahPeserta >= 41 and Platform == 0 and Device == 1 and Camera == 1 and ScreenShare == 0:
+                VD += float(0.540)
 
-        #ZoomMobile + ScreenShare
-        if JumlahPeserta <= 10 and Platform == 0 and Device == 1 and Camera == 1 and ScreenShare == 1:
-            VD += float(0.270)
-            SS += float(0.045)
-        if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 0 and Device == 1 and Camera == 1 and ScreenShare == 1:
-            VD += float(0.337)
-            SS += float(0.045)
-        if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 0 and Device == 1 and Camera == 1 and ScreenShare == 1:
-            VD += float(0.405)
-            SS += float(0.045)
-        if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 0 and Device == 1 and Camera == 1 and ScreenShare == 1:
-            VD += float(0.472)
-            SS += float(0.045)
-        if JumlahPeserta >= 41 and Platform == 0 and Device == 1 and Camera == 1 and ScreenShare == 1:
-            VD += float(0.540)
-            SS += float(0.045)
+            #ZoomMobile + ScreenShare
+            if JumlahPeserta <= 10 and Platform == 0 and Device == 1 and Camera == 1 and ScreenShare == 1:
+                VD += float(0.270)
+                SS += float(0.045)
+            if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 0 and Device == 1 and Camera == 1 and ScreenShare == 1:
+                VD += float(0.337)
+                SS += float(0.045)
+            if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 0 and Device == 1 and Camera == 1 and ScreenShare == 1:
+                VD += float(0.405)
+                SS += float(0.045)
+            if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 0 and Device == 1 and Camera == 1 and ScreenShare == 1:
+                VD += float(0.472)
+                SS += float(0.045)
+            if JumlahPeserta >= 41 and Platform == 0 and Device == 1 and Camera == 1 and ScreenShare == 1:
+                VD += float(0.540)
+                SS += float(0.045)
 
-        #MeetSD
-        if JumlahPeserta <= 10 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 0:
-            VD += float(0.135)
-        if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 0:
-            VD += float(0.270)
-        if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 0:
-            VD += float(0.405)
-        if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 0:
-            VD += float(0.540)
-        if JumlahPeserta >= 41 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 0:
-            VD += float(0.675)
+            #MeetSD
+            if JumlahPeserta <= 10 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 0:
+                VD += float(0.135)
+            if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 0:
+                VD += float(0.270)
+            if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 0:
+                VD += float(0.405)
+            if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 0:
+                VD += float(0.540)
+            if JumlahPeserta >= 41 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 0:
+                VD += float(0.675)
 
-        #MeetSD + ScreenShare
-        if JumlahPeserta <= 10 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 1:
-            VD += float(0.135)
-            SS += float(0.045)
-        if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 1:
-            VD += float(0.270)
-            SS += float(0.045)
-        if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 1:
-            VD += float(0.405)
-            SS += float(0.045)
-        if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 1:
-            VD += float(0.540)
-            SS += float(0.045)
-        if JumlahPeserta >= 41 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 1:
-            VD += float(0.675)
-            SS += float(0.045)
+            #MeetSD + ScreenShare
+            if JumlahPeserta <= 10 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 1:
+                VD += float(0.135)
+                SS += float(0.045)
+            if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 1:
+                VD += float(0.270)
+                SS += float(0.045)
+            if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 1:
+                VD += float(0.405)
+                SS += float(0.045)
+            if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 1:
+                VD += float(0.540)
+                SS += float(0.045)
+            if JumlahPeserta >= 41 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 0 and ScreenShare == 1:
+                VD += float(0.675)
+                SS += float(0.045)
 
-        #MeetHD
-        if JumlahPeserta <= 10 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 0:
-            VD += float(1.170)
-        if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 0:
-            VD += float(1.305)
-        if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 0:
-            VD += float(1.440)
-        if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 0:
-            VD += float(1.575)
-        if JumlahPeserta >= 41 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 0:
-            VD += float(1.710)
+            #MeetHD
+            if JumlahPeserta <= 10 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 0:
+                VD += float(1.170)
+            if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 0:
+                VD += float(1.305)
+            if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 0:
+                VD += float(1.440)
+            if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 0:
+                VD += float(1.575)
+            if JumlahPeserta >= 41 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 0:
+                VD += float(1.710)
 
-        #MeetHD + ScreenShare
-        if JumlahPeserta <= 10 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 1:
-            VD += float(1.170)
-            SS += float(0.045)
-        if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 1:
-            VD += float(1.305)
-            SS += float(0.045)
-        if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 1:
-            VD += float(1.440)
-            SS += float(0.045)
-        if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 1:
-            VD += float(1.575)
-            SS += float(0.045)
-        if JumlahPeserta >= 41 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 1:
-            VD += float(1.710)
-            SS += float(0.045)
+            #MeetHD + ScreenShare
+            if JumlahPeserta <= 10 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 1:
+                VD += float(1.170)
+                SS += float(0.045)
+            if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 1:
+                VD += float(1.305)
+                SS += float(0.045)
+            if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 1:
+                VD += float(1.440)
+                SS += float(0.045)
+            if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 1:
+                VD += float(1.575)
+                SS += float(0.045)
+            if JumlahPeserta >= 41 and Platform == 1 and Device == 0 and Camera == 1 and Resolution == 1 and ScreenShare == 1:
+                VD += float(1.710)
+                SS += float(0.045)
 
-        #MeetMobile
-        if JumlahPeserta <= 10 and Platform == 1 and Device == 1 and Camera == 1 and ScreenShare == 0:
-            VD += float(0.067)
-        if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 1 and Device == 1 and Camera == 1 and ScreenShare == 0:
-            VD += float(0.101)
-        if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 1 and Device == 1 and Camera == 1 and ScreenShare == 0:
-            VD += float(0.135)
-        if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 1 and Device == 1 and Camera == 1 and ScreenShare == 0:
-            VD += float(0.168)
-        if JumlahPeserta >= 41 and Platform == 1 and Device == 1 and Camera == 1 and ScreenShare == 0:
-            VD += float(0.202)
+            #MeetMobile
+            if JumlahPeserta <= 10 and Platform == 1 and Device == 1 and Camera == 1 and ScreenShare == 0:
+                VD += float(0.067)
+            if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 1 and Device == 1 and Camera == 1 and ScreenShare == 0:
+                VD += float(0.101)
+            if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 1 and Device == 1 and Camera == 1 and ScreenShare == 0:
+                VD += float(0.135)
+            if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 1 and Device == 1 and Camera == 1 and ScreenShare == 0:
+                VD += float(0.168)
+            if JumlahPeserta >= 41 and Platform == 1 and Device == 1 and Camera == 1 and ScreenShare == 0:
+                VD += float(0.202)
 
-        #MeetMobile + ScreenShare
-        if JumlahPeserta <= 10 and Platform == 1 and Device == 1 and Camera == 1 and ScreenShare == 1:
-            VD += float(0.067)
-            SS += float(0.045)
-        if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 1 and Device == 1 and Camera == 1 and ScreenShare == 1:
-            VD += float(0.101)
-            SS += float(0.045)
-        if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 1 and Device == 1 and Camera == 1 and ScreenShare == 1:
-            VD += float(0.135)
-            SS += float(0.045)
-        if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 1 and Device == 1 and Camera == 1 and ScreenShare == 1:
-            VD += float(0.168)
-            SS += float(0.045)
-        if JumlahPeserta >= 41 and Platform == 1 and Device == 1 and Camera == 1 and ScreenShare == 1:
-            VD += float(0.202)
-            SS += float(0.045)
+            #MeetMobile + ScreenShare
+            if JumlahPeserta <= 10 and Platform == 1 and Device == 1 and Camera == 1 and ScreenShare == 1:
+                VD += float(0.067)
+                SS += float(0.045)
+            if JumlahPeserta >= 11 and JumlahPeserta <= 20 and Platform == 1 and Device == 1 and Camera == 1 and ScreenShare == 1:
+                VD += float(0.101)
+                SS += float(0.045)
+            if JumlahPeserta >= 21 and JumlahPeserta <= 30 and Platform == 1 and Device == 1 and Camera == 1 and ScreenShare == 1:
+                VD += float(0.135)
+                SS += float(0.045)
+            if JumlahPeserta >= 31 and JumlahPeserta <= 40 and Platform == 1 and Device == 1 and Camera == 1 and ScreenShare == 1:
+                VD += float(0.168)
+                SS += float(0.045)
+            if JumlahPeserta >= 41 and Platform == 1 and Device == 1 and Camera == 1 and ScreenShare == 1:
+                VD += float(0.202)
+                SS += float(0.045)
 
-        #Audio
-        if JumlahPeserta >= 0 and Camera == 0 and ScreenShare == 0:
-            AD += float(0.032)
+            #Audio
+            if JumlahPeserta >= 0 and Camera == 0 and ScreenShare == 0:
+                AD += float(0.032)
 
-        #Audio + ScreenShare
-        if JumlahPeserta >= 0 and Camera == 0 and ScreenShare == 1:
-            AD += float(0.032)
-            SS += float(0.045)
+            #Audio + ScreenShare
+            if JumlahPeserta >= 0 and Camera == 0 and ScreenShare == 1:
+                AD += float(0.032)
+                SS += float(0.045)
 
         #Function
-        T = lambda t, v, a, s: t * (v + a + s)
+        T = lambda t, v, a, s, y: t * (v + a + s + y)
 
         #Process
-        HasilKuota = float(T(WaktuPemakaian, VD, AD, SS))
+        HasilKuota = float(T(WaktuPemakaian, VD, AD, SS, YT))
         KonversiKuota = round(HasilKuota, 2)
         PenggunaanKuota = str(KonversiKuota) + "GB"
 
@@ -502,216 +745,246 @@ def System():
             ZoomData.append(PenggunaanKuota)
             AllData.append(KonversiKuota)
             MeetData.append("-")
+            YoutubeData.append("-")
             DatesData.append(DateNow)
             Indicator.append("X")
+            
         elif Platform == 1:
             MeetData.append("        " + PenggunaanKuota)
             AllData.append(KonversiKuota)
             ZoomData.append("  -")
+            YoutubeData.append("      -")
+            DatesData.append(DateNow)
+            Indicator.append("X")
+            
+        elif Platform == 2:
+            YoutubeData.append("    " + PenggunaanKuota)
+            AllData.append(KonversiKuota)
+            ZoomData.append("  -")
+            MeetData.append("      -")
             DatesData.append(DateNow)
             Indicator.append("X")
 
-        #SaveAllData
-        with open('AllData.txt', 'w') as filehandle:
-            for Data in AllData:
-                filehandle.write('%s\n' % Data)
-
-        #SaveDatesData
-        with open('DatesData.txt', 'w') as filehandle:
-            for Data in DatesData:
-                filehandle.write('%s\n' % Data)
-
-        #SaveIndicator
-        with open('Indicator.txt', 'w') as filehandle:
-            for Data in Indicator:
-                filehandle.write('%s\n' % Data)
-
-        #SaveMeetData
-        with open('MeetData.txt', 'w') as filehandle:
-            for Data in MeetData:
-                filehandle.write('%s\n' % Data)
-
-        #SaveZoomData
-        with open('ZoomData.txt', 'w') as filehandle:
-            for Data in ZoomData:
-                filehandle.write('%s\n' % Data)
-
+        #SaveData
+        saveData()
+        
         #Intermission
-        Load("Memproses Data")
+        load(processText)
 
         #Result
-        clear()
-        Title()
-        print("   Kuota yang anda gunakan sebesar " + PenggunaanKuota +
-              " / Hari")
-        Space()
+        title()
+        print("   " + resultTextFront + PenggunaanKuota + resultTextBack)
+        space()
 
-        #Recommendation
-        print("   Rekomendasi jumlah kuota:")
+        #Estimation
+        print("   " + estimationText)
 
         if KonversiKuota <= float(1):
-            print("   30GB / Bulan")
+            print("   30GB" + estimationTextMonth)
         elif KonversiKuota >= float(1) and KonversiKuota <= float(5):
-            print("   60GB / Bulan")
-        elif KonversiKuota >= float(5) and KonversiKuota <= float(10):
-            print("   120GB / Bulan")
-        elif KonversiKuota >= float(10) and KonversiKuota <= float(15):
-            print("   120GB / Bulan")
+            print("   60GB" + estimationTextMonth)
+        elif KonversiKuota >= float(5) and KonversiKuota <= float(15):
+            print("   120GB" + estimationTextMonth)
         elif KonversiKuota >= float(15):
-            print("   Maaf, belum ada rekomendasi untukmu.")
+            print("   " + estimationTextLimit)
 
         #Final
-        Space()
-        print("   Ingin menghitung kembali?")
-        print("""
-      1. Iya
-      2. Tidak
-      """)
-        FinalChoice = int(
-            input("   Ketik angka dan Enter untuk melanjutkan (1/2): "))
+        space()
+        print("   " + finalText)
+        print(yesNoText)
+        FinalChoice = str(input("   " + mainInputText + "(1/2): "))
 
         #FinalChoice
-        if FinalChoice == 1:
+        if FinalChoice == "1":
             clear()
-            Section1()
-        elif FinalChoice == 2:
+            section1()
+        elif FinalChoice == "2":
             clear()
-            System()
+            mainSystem()
         else:
-            print("   Pilihan tidak valid. Kembali ke Menu Utama")
-            Time(2)
+            print("   " + errorMainText)
+            wait(2)
             clear()
-            System()
+            mainSystem()
 
- #Section2
-
-    def Section2():
+    #Section2
+    def section2():
         #Intermission
         if "X" in Indicator:
-            Load("Mengambil Data")
+            load(loadText)
         else:
             clear()
 
         #Title
-        print(f"{'DATA PEMAKAIAN' : ^60}")
-        Space()
+        print(f"{section2Title : ^76}")
+        space()
 
         #TableName
-        print(f"{'Tanggal' : ^28}{'Zoom' : ^1}{'Meet' : ^28}")
-        print(f"{'_______________________________________________' : ^60}")
+        print(f"{tableNameDate : ^28}{'Zoom' : ^7}{'Meet' : ^24}{'Youtube' : ^7}")
+        print(f"{'___________________________________________________________' : ^78}")
 
         #TableContents
         if "X" in Indicator:
             for data in range(0, len(Indicator)):
-                print(
-                    f"{DatesData[data] : ^28}{ZoomData[data] : ^1}{MeetData[data] : ^25}"
-                )
-                Space()
+                print(f"{DatesData[data] : ^28}{ZoomData[data] : ^1}{MeetData[data] : ^25}{YoutubeData[data] : ^7}")
+                space()
         else:
-            print(f"{'Belum ada data yang dimasukkan' : ^60}")
-            Space()
+            print(f"{tableContentsText : ^78}")
+            space()
 
         #Note
-        Space()
+        space()
         if "X" in Indicator:
-          print("      *Note: 1GB = 1000MB*")
-        Space()
+          print("         *Note: 1GB = 1000MB*")
+        space()
 
         #Back
-        Back = input("      Tekan Enter untuk kembali ke Menu Utama ")
-        clear()
-        System()
+        back("         ",backText)
 
- #Section3
-
-    def Section3():
+    #Section3
+    def section3():
         #Title
-        print(f"{'TENTANG' : ^60}")
-        Space()
+        print(f"{section3Title : ^60}")
+        space()
 
         #Developer
-        print("   Dibuat oleh Melvin Tungadi")
-        Space()
+        print("   " + developerText)
+        space()
 
-        #Description
-        print("   Deskripsi:")
-        print("""
-   "Aplikasi penghitung kuota untuk membantu
-   keberlangsungan pembelajaran jarak jauh."
-
-   Selama #DiRumahAja segalanya dilakukan
-   menggunakan internet, termasuk kegiatan
-   belajar mengajar. Bicara tentang internet
-   tidak lepas dari penggunaan kuota.
-   Terkadang, kuota kita tidak cukup dengan
-   penggunaan kita sehingga kegiatan belajar
-   mengajar menjadi tersendat. Dengan aplikasi
-   ini, diharapkan anda bisa mengetahui penggunaan
-   kuota anda melalui platform Zoom & Google Meet
-   sehingga bisa memilih jumlah kuota yang pas
-   sesuai dengan kebutuhan.
-        """)
+        #Information
+        print(infoText)
+        space()
 
         #References
-        print("   Sumber Referensi:")
-        print("""   https://tinyurl.com/GoogleUsage
+        print("   " + referencesTitleText)
+        print("""   
+   https://tinyurl.com/GoogleUsage
+   https://tinyurl.com/YoutubeUsage   
    https://tinyurl.com/ZoomUsage
    https://www.w3schools.com/
         """)
-        Space()
+        space()
 
         #Footer
-        print("   V. 1.0.")
-        print("   © Copyright 2021")
-        Space()
+        print("   V. 1.1.")
+        print("   AnotherMelvin ©2021")
+        space()
 
         #Back
-        Back = input("   Tekan Enter untuk kembali ke Menu Utama ")
-        clear()
-        System()
+        back("   ",backText)
 
- #Section4
+    #Section4
+    def section4():
+        #Title
+        print(f"{section4Title : ^60}")
+        space()
+    
+        #LanguageInfo
+        print("   " + languageText)
+        print(languageChoiceText)
 
-    def Section4():
+        #LanguageConfirmation
+        LanguageConfirmation = str(input("   " + mainInputText + "(1/2): "))
+
+        if LanguageConfirmation == "1":
+            LanguageIndicator.clear()
+            LanguageIndicator.append("English")
+            with open('LanguageIndicator.txt', 'w') as filehandle:
+                for Data in LanguageIndicator:
+                    filehandle.write('%s\n' % Data)                   
+            clear()
+            mainSystem()
+            
+        elif LanguageConfirmation == "2":
+            LanguageIndicator.clear()
+            LanguageIndicator.append("Indonesia")
+            with open('LanguageIndicator.txt', 'w') as filehandle:
+                for Data in LanguageIndicator:
+                    filehandle.write('%s\n' % Data)            
+            clear()
+            mainSystem()
+            
+        else:
+            error(errorText)
+            section4()
+
+    #Section5
+    def section5():
+        #ResetInfo
+        print("   " + resetQuestionText)
+        print(yesNoText)
+
+        #ResetConfirmation
+        ResetConfirmation = str(input("   " + mainInputText + "(1/2): "))
+
+        if ResetConfirmation == "1":
+            clear()
+            AllData.clear()
+            DatesData.clear()
+            Indicator.clear()
+            MeetData.clear()
+            YoutubeData.clear()
+            ZoomData.clear()
+            saveData()    
+            load(resetText)
+            print(resetConfirmationText)
+            wait(2)
+            clear()
+            mainSystem()
+            
+        elif ResetConfirmation == "2":
+            clear()
+            mainSystem()
+
+        else:
+            error(errorText)
+            section5()
+
+    #Section6
+    def section6():
         #ConfirmationInfo
-        print("   Apakah anda ingin keluar?")
-        print("""
-     1. Iya
-     2. Tidak
-     """)
+        print("   " + exitText)
+        print(yesNoText)
 
         #Confirmation
-        Confirmation = int(
-            input("   Ketik angka dan Enter untuk melanjutkan (1/2): "))
+        ExitConfirmation = str(input("   " + mainInputText + "(1/2): "))
 
-        if Confirmation == 1:
+        if ExitConfirmation == "1":
             clear()
-            print("Terima kasih telah menggunakan!")
-            Time(2)
+            print(confirmationText)
+            wait(2)
             clear()
-        elif Confirmation == 2:
+            exit()
+
+        elif ExitConfirmation == "2":
             clear()
-            System()
+            mainSystem()
+
         else:
-            print("   Pilihan tidak valid, silahkan coba lagi.")
-            Time(1)
-            clear()
-            Section4()
+            error(errorText)
+            section6()
 
- #MainConditions
-
+    #MainConditions
+    while Section == 0:
+        mainSystem()
     while Section == 1:
-        Section1()
+        section1()
         break
     while Section == 2:
-        Section2()
+        section2()
         break
     while Section == 3:
-        Section3()
+        section3()
         break
     while Section == 4:
-        Section4()
+        section4()
         break
+    while Section == 5:
+        section5()
+        break
+    while Section == 6:
+        section6()
+        break        
 
 #Excecute
-System()
+mainSystem()
