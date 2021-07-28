@@ -2,6 +2,7 @@
 
 Try the program:
 https://tinyurl.com/KUOTER
+(For Windows only)
 
 / Kuota Meter /
 
