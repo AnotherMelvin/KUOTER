@@ -1,8 +1,8 @@
 # KUOTER
 
 Try the program:
-https://tinyurl.com/KUOTER
-(For Windows only)
+- https://tinyurl.com/KuoterWindows (Windows)
+- https://replit.com/@MelvinTungadi/KUOTER?v=1 (Web)
 
 / Kuota Meter /
 
