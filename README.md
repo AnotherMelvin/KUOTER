@@ -1,4 +1,8 @@
 # KUOTER
+
+Try the program:
+https://tinyurl.com/KUOTER
+
 / Kuota Meter /
 
 A program for calculating how much data has been used from certain applications or services.
