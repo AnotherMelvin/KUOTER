@@ -29,32 +29,32 @@ def error(text):
 #SaveFunction
 def saveData():
     #SaveAllData
-        with open("AllData.txt", "w") as filehandle:
+        with open("data/AllData.txt", "w") as filehandle:
             for Data in AllData:
                 filehandle.write("%s\n" % Data)
 
         #SaveDatesData
-        with open("DatesData.txt", "w") as filehandle:
+        with open("data/DatesData.txt", "w") as filehandle:
             for Data in DatesData:
                 filehandle.write("%s\n" % Data)
 
         #SaveIndicator
-        with open("Indicator.txt", "w") as filehandle:
+        with open("data/Indicator.txt", "w") as filehandle:
             for Data in Indicator:
                 filehandle.write("%s\n" % Data)
 
         #SaveMeetData
-        with open("MeetData.txt", "w") as filehandle:
+        with open("data/MeetData.txt", "w") as filehandle:
             for Data in MeetData:
                 filehandle.write("%s\n" % Data)
 
         #SaveYoutubeData
-        with open("YoutubeData.txt", "w") as filehandle:
+        with open("data/YoutubeData.txt", "w") as filehandle:
             for Data in YoutubeData:
                 filehandle.write("%s\n" % Data)
 
         #SaveZoomData
-        with open("ZoomData.txt", "w") as filehandle:
+        with open("data/ZoomData.txt", "w") as filehandle:
             for Data in ZoomData:
                 filehandle.write("%s\n" % Data)
 
@@ -100,43 +100,43 @@ YoutubeData = []
 ZoomData = []
 
 #LoadAllData
-with open("AllData.txt", "r") as filehandle:
+with open("data/AllData.txt", "r") as filehandle:
     AllData = [
         current_data.rstrip() for current_data in filehandle.readlines()
     ]
 
 #LoadDatesData
-with open("DatesData.txt", "r") as filehandle:
+with open("data/DatesData.txt", "r") as filehandle:
     DatesData = [
         current_data.rstrip() for current_data in filehandle.readlines()
     ]
 
 #LoadIndicator
-with open("Indicator.txt", "r") as filehandle:
+with open("data/Indicator.txt", "r") as filehandle:
     Indicator = [
         current_data.rstrip() for current_data in filehandle.readlines()
     ]
 
 #LoadLanguageIndicator
-with open("LanguageIndicator.txt", "r") as filehandle:
+with open("data/LanguageIndicator.txt", "r") as filehandle:
     LanguageIndicator = [
         current_data.rstrip() for current_data in filehandle.readlines()
     ]
 
 #LoadMeetData
-with open("MeetData.txt", "r") as filehandle:
+with open("data/MeetData.txt", "r") as filehandle:
     MeetData = [
         current_data.rstrip() for current_data in filehandle.readlines()
     ]
 
 #LoadYoutubeData
-with open("YoutubeData.txt", "r") as filehandle:
+with open("data/YoutubeData.txt", "r") as filehandle:
     YoutubeData = [
         current_data.rstrip() for current_data in filehandle.readlines()
     ]
     
 #LoadZoomData
-with open("ZoomData.txt", "r") as filehandle:
+with open("data/ZoomData.txt", "r") as filehandle:
     ZoomData = [
         current_data.rstrip() for current_data in filehandle.readlines()
     ]
@@ -216,7 +216,7 @@ def mainSystem():
    1. English
    2. Bahasa Indonesia
    """
-        resetQuestionText = "Do you want to reset the data?"
+        resetQuestionText = "Do you want to reset your history data?"
         resetConfirmationText = "Data has been reset."
         exitText = "Do you want to exit?"
         confirmationText = "Thank you for using!"
@@ -268,7 +268,7 @@ def mainSystem():
         developerText = "Dibuat oleh Melvin Tungadi"
         infoText = """
    Sebuah proyek pribadi untuk bereksperimen dengan
-   pemrograman, semua data yang ditampilan dalam
+   programming, semua data yang ditampilan dalam
    program hanyalah perkiraan dan bukan hasil yang
    akurat.
         
@@ -283,7 +283,7 @@ def mainSystem():
    1. Bahasa Inggris
    2. Bahasa Indonesia
    """
-        resetQuestionText = "Apakah anda ingin mereset data anda?"
+        resetQuestionText = "Apakah anda ingin mereset data pemakaian anda?"
         resetConfirmationText = "Data Pemakaian telah direset."
         exitText = "Apakah anda ingin keluar?"
         confirmationText = "Terima kasih telah menggunakan!"        
@@ -889,7 +889,7 @@ def mainSystem():
         if LanguageConfirmation == "1":
             LanguageIndicator.clear()
             LanguageIndicator.append("English")
-            with open('LanguageIndicator.txt', 'w') as filehandle:
+            with open('data/LanguageIndicator.txt', 'w') as filehandle:
                 for Data in LanguageIndicator:
                     filehandle.write('%s\n' % Data)                   
             clear()
@@ -898,7 +898,7 @@ def mainSystem():
         elif LanguageConfirmation == "2":
             LanguageIndicator.clear()
             LanguageIndicator.append("Indonesia")
-            with open('LanguageIndicator.txt', 'w') as filehandle:
+            with open('data/LanguageIndicator.txt', 'w') as filehandle:
                 for Data in LanguageIndicator:
                     filehandle.write('%s\n' % Data)            
             clear()
