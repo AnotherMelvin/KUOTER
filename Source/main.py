@@ -169,6 +169,7 @@ def mainSystem():
         peopleText = "(People): "
         errorText = "Your input is invalid, please try again."
         errorMainText = "Your input is invalid, going back to Main Menu."
+        backText = "Press Enter to go back to Main Menu."
         processText = "Processing"
         resetText = "Resetting"
         loadText = "Loading"
@@ -177,7 +178,6 @@ def mainSystem():
         section3Title = "ABOUT"
         section4Title = "LANGUAGE"
         platformText = "Choose your platform:"
-        platformBackText = "       4. Go back to Main Menu"
         deviceText = "Choose your device:"
         cameraText = "Is the camera enabled?:"
         yesNoText = """ 
@@ -236,6 +236,7 @@ def mainSystem():
         peopleText = "(Orang): "
         errorText = "Pilihan anda tidak valid, silahkan coba lagi."
         errorMainText = "Pilihan anda tidak valid, kembali ke Menu Utama."
+        backText = "Tekan Enter untuk kembali ke Menu Utama."
         processText = "Memproses Data"
         resetText = "Mereset Data"
         loadText = "Mengambil Data"
@@ -244,7 +245,6 @@ def mainSystem():
         section3Title = "TENTANG"
         section4Title = "BAHASA"
         platformText = "Pilih platform anda:"
-        platformBackText = "       4. Kembali ke Menu Utama"
         deviceText = "Pilih device anda:"
         cameraText = "Apakah anda menggunakan kamera?:"
         yesNoText = """ 
@@ -264,7 +264,6 @@ def mainSystem():
         finalText = "Ingin menghitung kembali?"
         tableNameDate = "Tanggal"
         tableContentsText = "Belum ada data yang dimasukkan."
-        backText = "Tekan Enter untuk kembali ke Menu Utama."
         developerText = "Dibuat oleh Melvin Tungadi"
         infoText = """
    Sebuah proyek pribadi untuk bereksperimen dengan
@@ -355,10 +354,11 @@ def mainSystem():
         print(""" 
        1. Zoom 
        2. Google Meet
-       3. Youtube""")
-        print(platformBackText)
+       3. Youtube
+       """)
+        print("   " + backText)
         space()
-        PlatformChoice = str(input("   " + mainInputText + "(1/2/3/4): "))
+        PlatformChoice = str(input("   " + mainInputText + "(1/2/3): "))
 
         #PlatformChoice
         if PlatformChoice == "1":
@@ -375,7 +375,7 @@ def mainSystem():
             P = " Youtube"
             clear()
             
-        elif PlatformChoice == "4":
+        elif PlatformChoice == "":
             clear()
             mainSystem()
             
@@ -882,6 +882,8 @@ def mainSystem():
         #LanguageInfo
         print("   " + languageText)
         print(languageChoiceText)
+        print("   " + backText)
+        space()
 
         #LanguageConfirmation
         LanguageConfirmation = str(input("   " + mainInputText + "(1/2): "))
@@ -901,6 +903,10 @@ def mainSystem():
             with open('data/LanguageIndicator.txt', 'w') as filehandle:
                 for Data in LanguageIndicator:
                     filehandle.write('%s\n' % Data)            
+            clear()
+            mainSystem()
+            
+        elif LanguageConfirmation == "":
             clear()
             mainSystem()
             
