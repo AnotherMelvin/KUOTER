@@ -2,7 +2,9 @@
 
 Try the program:
 - https://tinyurl.com/KuoterWindows (Windows)
-*Note: Turn off your antivirus program for a moment if it detect it as a virus, this program is safe (trust me).
+  *Note: 
+  - Turn off your antivirus program for a moment if it detect it as a virus, this program is safe (trust me).
+  - Keep it as one folder to work.
 
 - https://replit.com/@MelvinTungadi/KUOTER?v=1 (Web)
 
